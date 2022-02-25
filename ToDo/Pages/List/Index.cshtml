@@ -1,0 +1,72 @@
+﻿@page
+@model ToDo.Pages.List.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<form>
+    <p>
+        Title: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+    <select asp-for="ScheduleStatus" asp-items="Model.Status">
+            <option value="">All</option>
+    </select>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedule[0].DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedule[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedule[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedule[0].Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedule[0].Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Schedule) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                <a asp-page="/SignUp/Create">Home</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
